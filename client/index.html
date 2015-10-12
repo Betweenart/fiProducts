@@ -27,6 +27,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <div ng-include="'components/navbar/navbar.html'"></div>
     <div ui-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -57,13 +58,15 @@
       <!-- endbower -->
     <!-- endbuild -->
 
-        
+
         <!-- build:js(.tmp) app/app.js -->
-        
+
         <script src="app/app.js"></script>
           <!-- injector:js -->
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/products/products.controller.js"></script>
+          <script src="app/products/products.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->

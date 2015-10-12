@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-// Get list of productss
+// Get list of products
 exports.index = function (req, res) {
   res.json([
     {
