@@ -41,13 +41,6 @@ exports.index = (req, res) => {
       // return json response
       res.json(response);
     });
-
-  if (err) {
-    return handleError(res, err);
-  }
-
-  // TODO get from DB
-  res.json(200, figures);
 };
 
 /**
@@ -55,27 +48,22 @@ exports.index = (req, res) => {
  * @method show
  */
 exports.show = (req, res) => {
-  if (err) {
-    return handleError(res, err);
-  }
+  knex.select().table('products')
+    .where('id', req.params.id)
+    .asCallback(function (err, rows) {
+      if (err) return handleError(res, err);
+      var response = null;
+      _.each(rows, function (row) {
+        response = row;
+      });
 
-  // TODO get from DB
-  var product = [{
-    id: 8,
-    type: 'Action Figure',
-    name: 'Slark',
-    info: 'Little known to the inhabitants of the dry world, Dark Reef is a sunken prison where the worst of the sea-bred are sent for crimes against their fellows. It is a razor barbed warren full of murderous slithereen, treacherous Deep Ones, sociopathic meranths. In this dim labyrinth, patrolled by eels and guarded by enormous anemones, only the vicious survive.',
-    imageUrl: 'http://cdn.dota2.com/apps/dota2/images/heroes/slark_full.png?v=3018418?v=3018418',
-    price: 34.00,
-    currency: '£',
-    stock: 9
-  }];
+      if (!response) {
+        return res.send(404);
+      }
 
-  if (!product) {
-    return res.send(404);
-  }
-
-  res.json(200, product);
+      // return json response
+      res.json(response);
+    });
 };
 
 /**
@@ -85,9 +73,6 @@ exports.show = (req, res) => {
 exports.create = (req, res) => {
   console.log(req.body);
 
-  if (err) {
-    return handleError(res, err);
-  }
 
   // TODO create in DB and return object with proper table ID
   res.json(201, {
