@@ -71,20 +71,37 @@ exports.show = (req, res) => {
  * @method create
  */
 exports.create = (req, res) => {
-  console.log(req.body);
+  var toInsert = {
+    id: null,
+    name: req.body.name || '',
+    info: req.body.info || 'no info',
+    type: req.body.type || 'Action Figure',
+    imageUrl: req.body.imageUrl || 'no image',
+    price: req.body.price || 0.00,
+    currency: req.body.currency || '£',
+    stock: req.body.stock || 0
+  };
 
+  knex('products').insert(toInsert)
+    .asCallback(function (err, rows) {
+      if (err) return handleError(res, err);
+      knex.select().table('products')
+        .where('id', rows[0])
+        .asCallback(function (err, rows) {
+          if (err) return handleError(res, err);
+          var response = null;
+          _.each(rows, function (row) {
+            response = row;
+          });
 
-  // TODO create in DB and return object with proper table ID
-  res.json(201, {
-    id: Math.ceil(Math.random() * 99999),
-    type: 'Action Figure',
-    name: '',
-    info: 'no info',
-    imageUrl: 'no image',
-    price: 0.00,
-    currency: '£',
-    stock: 0
-  });
+          if (!response) {
+            return res.send(404);
+          }
+
+          // return json response
+          res.json(response);
+        });
+    });
 };
 
 /**
@@ -92,29 +109,28 @@ exports.create = (req, res) => {
  * @method update
  */
 exports.update = (req, res) => {
-  if (req.params.id) {
-    delete req.params.id;
+  // get rid of id if was passed in body
+  if (req.body.id) {
+    delete req.body.id;
   }
 
-  // TODO find product
-  if (err) {
-    return handleError(res, err);
-  }
+  knex('books')
+    .where('id', req.params.id)
+    .update(req.body)
+    .asCallback(function (err, rows) {
+      if (err) return handleError(res, err);
+      var response = null;
+      _.each(rows, function (row) {
+        response = row;
+      });
 
-  // TODO get from DB
-  var product = {
-    id: req.params.id,
-    type: 'Action Figure',
-    currency: '£'
-  };
+      if (!response) {
+        return res.send(404);
+      }
 
-  if (!product) {
-    return res.send(404);
-  }
-  var updated = _.merge(product, req.body);
-
-  // TODO get product from DB and UPDATE
-  res.json(200, product);// return updated product
+      // return json response
+      res.json(response);
+    });
 };
 
 /**

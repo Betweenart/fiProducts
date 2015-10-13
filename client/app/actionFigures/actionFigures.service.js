@@ -36,15 +36,20 @@ angular.module('fiProductsApp')
         return ( request.then(handleSuccess, handleError) );
       },
 
-      addProduct: () => {
+      addProduct: (data) => {
+        data = data || {};
         var request = $http({
           method: "post",
-          url: "/api/products"
+          url: "/api/products",
+          data: data
         });
         return ( request.then(handleSuccess, handleError) );
       },
 
       saveProduct: (data) => {
+        console.log('saveProduct:');
+        console.dir(data);
+
         var request = $http({
           method: "put",
           url: "/api/products/" + data.id,
