@@ -46,8 +46,8 @@ angular.module('fiProductsApp')
         return ( request.then(handleSuccess, handleError) );
       },
 
-      saveProduct: (data) => {
-        console.log('saveProduct:');
+      updateProduct: (data) => {
+        console.log('updateProduct:');
         console.dir(data);
 
         var request = $http({

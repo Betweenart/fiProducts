@@ -114,15 +114,14 @@ exports.update = (req, res) => {
     delete req.body.id;
   }
 
-  knex('books')
-    .where('id', req.params.id)
+  knex('products')
+    .where('id', parseInt(req.params.id, 10))
     .update(req.body)
     .asCallback(function (err, rows) {
       if (err) return handleError(res, err);
-      var response = null;
-      _.each(rows, function (row) {
-        response = row;
-      });
+
+      var response = rows;
+      console.dir(rows);
 
       if (!response) {
         return res.send(404);
@@ -138,19 +137,20 @@ exports.update = (req, res) => {
  * @method destroy
  */
 exports.destroy = (req, res) => {
-  if (err) {
-    return handleError(res, err);
-  }
+  knex('products')
+    .where('id', parseInt(req.params.id, 10))
+    .update(req.body)
+    .asCallback(function (err, rows) {
+      if (err) return handleError(res, err);
 
-  //TODO check in DB
-  var product = {
-    id: req.params.id
-  };
+      var response = rows;
+      console.dir(rows);
 
-  if (!product) {
-    return res.send(404);
-  }
+      if (!response) {
+        return res.send(404);
+      }
 
-  // TODO remove product from DB
-  res.json(200, product);
+      // return json response
+      res.json(response);
+    });
 };

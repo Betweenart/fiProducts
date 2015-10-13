@@ -11,9 +11,9 @@ angular.module('fiProductsApp')
       $scope.products = products;
     });
 
-    $scope.saveProduct = (data, id) => {
-      data.id = id;
-      actionFigures.saveProduct(data, id).then((data)=> {
+    $scope.saveProduct = (data, index) => {
+      data.id = $scope.products[index].id;
+      actionFigures.updateProduct(data).then((data)=> {
         console.log('Product Saved:');
         console.dir(data);
       });
