@@ -14,14 +14,20 @@ Created with Angular, Bower, Grunt and Node for FaceIt.
 ## Rest services:
 
  * get
- * add
- * remove
- * save
+ * get:id
+ * post: add/create
+ * delete: remove/delete
+ * put: save/update
 
 
 ```javascript
 Code reviewed... Needs a little tiny tiny update ;)
 In progress...
+Tested, all working well
+CRUD on http calls... well... could be on resource probably...
 ```
+
+Just JSON, no sockets here :)
+Sample tests, maybe I'll extend when time will be on my side ;)
 
 *Have a good day...*
