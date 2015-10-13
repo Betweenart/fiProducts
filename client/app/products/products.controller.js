@@ -7,28 +7,35 @@ angular.module('fiProductsApp')
     $scope.sortReverse = false;  // default sort order (asc=false)
     $scope.products = [];
 
+    /**
+     * Get and apply all products from DB
+     */
     actionFigures.getAllProducts().then((products) => {
       $scope.products = products;
     });
 
-    $scope.saveProduct = (data, index) => {
-      data.id = $scope.products[index].id;
-      actionFigures.updateProduct(data).then((data)=> {
+    /**
+     * Save/Update product in DB by Id + body json
+     */
+    $scope.saveProduct = (data, id) => {
+      data.id = id;
+      actionFigures.updateProduct(data).then(()=> {
         console.log('Product Saved:');
-        console.dir(data);
       });
     };
 
+    /**
+     * Remove product from DB by ID
+     */
     $scope.deleteProduct = (index, id) => {
-      $scope.tempData = $scope.products[index]; // hold item data if server removal fails
-      $scope.products.splice(index, 1); // remove from model
-
-      actionFigures.deleteProduct(id).then((data)=> {
-        $scope.tempData = null; // reset temp object if all is fine
-        console.log('Product Removed:' + data.id);
+      actionFigures.deleteProduct(id).then(()=> {
+        $scope.products.splice(index, 1); // remove from model
       });
     };
 
+    /**
+     * Little check if name is not to short
+     */
     $scope.checkName = (name) => {
       if (name.length < 2) {
         alert('Come on! Name is to short.');
@@ -36,6 +43,9 @@ angular.module('fiProductsApp')
       }
     };
 
+    /**
+     * Add product to DB and to scope if successful
+     */
     $scope.addProduct = function () {
       actionFigures.addProduct().then((data)=> {
         console.log('Product Added');
