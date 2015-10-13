@@ -7,28 +7,25 @@ angular.module('fiProductsApp')
     $scope.sortReverse = false;  // default sort order (asc=false)
     $scope.products = [];
 
-    actionFigures.getProducts().then((products) => {
+    actionFigures.getAllProducts().then((products) => {
       $scope.products = products;
     });
 
-    $scope.saveProduct = (data) => {
-      actionFigures.saveProduct(data).then(()=> {
-        console.log('Product Saved');
-      });
-    };
-
-    $scope.addProduct = (data) => {
-      actionFigures.addProduct(data).then(()=> {
-        console.log('Product Added');
+    $scope.saveProduct = (data, id) => {
+      data.id = id;
+      actionFigures.saveProduct(data, id).then((data)=> {
+        console.log('Product Saved:');
+        console.dir(data);
       });
     };
 
     $scope.deleteProduct = (index, id) => {
       $scope.tempData = $scope.products[index]; // hold item data if server removal fails
       $scope.products.splice(index, 1); // remove from model
-      actionFigures.deleteProduct(id).then(()=> {
+
+      actionFigures.deleteProduct(id).then((data)=> {
         $scope.tempData = null; // reset temp object if all is fine
-        console.log('Product Removed');
+        console.log('Product Removed:' + data.id);
       });
     };
 

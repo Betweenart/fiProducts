@@ -18,7 +18,7 @@ angular.module('fiProductsApp')
 
     // Return awesome API
     return ({
-      getProducts: () => {
+      getAllProducts: () => {
         var request = $http({
           method: "get",
           url: "/api/products"
@@ -27,24 +27,27 @@ angular.module('fiProductsApp')
         return ( request.then(handleSuccess, handleError) );
       },
 
+      getProduct: (id) => {
+        var request = $http({
+          method: "get",
+          url: "/api/products/" + id
+        });
+
+        return ( request.then(handleSuccess, handleError) );
+      },
+
       addProduct: () => {
         var request = $http({
           method: "post",
-          url: "/api/products",
-          params: {
-            action: "add"
-          }
+          url: "/api/products"
         });
         return ( request.then(handleSuccess, handleError) );
       },
 
       saveProduct: (data) => {
         var request = $http({
-          method: "post",
-          url: "/api/products",
-          params: {
-            action: "save"
-          },
+          method: "put",
+          url: "/api/products/" + data.id,
           data: data
         });
         return ( request.then(handleSuccess, handleError) );
@@ -52,11 +55,8 @@ angular.module('fiProductsApp')
 
       deleteProduct: (id) => {
         var request = $http({
-          method: "post",
-          url: "/api/products",
-          params: {
-            action: "delete"
-          },
+          method: "delete",
+          url: "/api/products/" + id,
           data: {
             id: id
           }
