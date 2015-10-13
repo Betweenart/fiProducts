@@ -20,7 +20,8 @@ Created with Angular, Bower, Grunt and Node for FaceIt.
 
 
 ```javascript
-Code in review :)
+Code reviewed... Needs a little tiny tiny update ;)
+In progress...
 ```
 
 *Have a good day...*
