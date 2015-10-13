@@ -19,9 +19,7 @@
       <div ng-if="!products">No heroes available... Come back in a bit...</div>
 
       <!-- Product list table -->
-
-      <table class="table table-striped table-hover table-condensed">
-        <div ng-if="products" ng-controller="EditableRowCtrl">
+        <table ng-if="products" class="table table-striped table-hover table-condensed">
           <thead>
           <tr>
             <td style="width:10%">
@@ -88,10 +86,9 @@
             </td>
           </tr>
           </tbody>
-        </div>
-      </table>
+        </table>
 
-      <button class="btn btn-default" ng-click="addProduct()">Add product</button>
+        <button class="btn btn-default" ng-click="addProduct()">Add product</button>
     </div>
   </div>
 </div>
