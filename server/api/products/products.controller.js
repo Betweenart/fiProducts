@@ -139,7 +139,7 @@ exports.update = (req, res) => {
 exports.destroy = (req, res) => {
   knex('products')
     .where('id', parseInt(req.params.id, 10))
-    .update(req.body)
+    .del()
     .asCallback(function (err, rows) {
       if (err) return handleError(res, err);
 
