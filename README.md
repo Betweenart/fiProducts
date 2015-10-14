@@ -19,6 +19,8 @@ Created with Angular, Bower, Grunt and Node for FaceIt.
  * delete: remove/delete
  * put: save/update
 
+## Demo Heroku
+[fi-products.herokuapp](https://fi-products.herokuapp.com/)
 
 ```javascript
 Code reviewed... Needs a little tiny tiny update ;)
