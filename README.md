@@ -1,6 +1,7 @@
 # Product list web app
 
 Created with Angular, Bower, Grunt and Node for FaceIt.
+The app is using a local sqlite DB, so no external DB is required.
 
 ## Basic useful feature list:
 
@@ -10,6 +11,13 @@ Created with Angular, Bower, Grunt and Node for FaceIt.
  * Remove product 
  * Sort ascending or descending by id, name or price
 
+## Instructions:
+How to install dependencies and start the app locally.
+```sh
+$ npm install
+$ bower install
+$ grunt serve
+```
 
 ## Rest services:
 
