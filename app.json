@@ -1,0 +1,8 @@
+{
+  "name": "Product list web app",
+  "description": "Created with Angular, Bower, Grunt and Node for FaceIt.",
+  "repository": "https://github.com/Betweenart/fiProducts.git",
+  "logo": "http://betweenart.co.uk/assets/images/bal-logo-bg-large.png",
+  "keywords": ["node", "express", "faceit", "betweenart"],
+  "image": "http://www.esports-conference.com/wp-content/uploads/2015/04/faceit_logo_dark.jpg"
+}
